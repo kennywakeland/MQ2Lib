@@ -1,43 +1,25 @@
-MQ-2 sensor library
-===================
+MQ-2 sensor library - yanoschik's fork
+======================================
 
-This is a simple library to use with the MQ-2 sensor in arduino.
+This is a simple library to use with the MQ-2 sensor and Arduino.
 
-Based on this page: <a href="http://sandboxelectronics.com/?p=165" target="_blank">Sandbox electronics</a>
+Based on: <a href="https://github.com/xerlay11/MQ-2-sensor-library" target="_blank">xerlay11/MQ-2-sensor-library</a>
 
-The following page it's also useful if you want to know how to calibrate the sensor (it's for MQ-6 sensor but it works as the MQ-2 does):
-<a href="http://www.savvymicrocontrollersolutions.com/index.php?sensor=mq-6-gas-sensors" target="_blank">http://www.savvymicrocontrollersolutions.com/index.php?sensor=mq-6-gas-sensors</a>
+More info also here:
+- <a href="http://sandboxelectronics.com/?p=165" target="_blank">Sandbox electronics</a>
+- <a href="http://playground.arduino.cc/Main/MQGasSensors" target="_blank">Arduino Playground - MQGasSensors</a>
 
 Usage
 ======
-To intall the library to use it with the Arduino IDE, download it as zip and unzip it into your 'libraries' folder and restart the Arduino IDE.
+To install the library into the Arduino IDE, download it as zip and unzip it into your 'libraries' folder and restart the Arduino IDE.
 
-To know how to use this library view the [sample](/arduino_sample/arduino_sample.ino).
-Examples
-=========
-Setup:
-<pre lang="cpp"><code>
-  #include &#60;MQ2.h&#62;
-  
-  int pin = A0;
-  
-  MQ2 mq2(pin);
-  
-  void setup(){
-    mq2.begin();
-  }
-</code></pre>
+For more on usage - see the included [example](/examples/mq2_example/mq2_example.ino).
 
-Read all data:
-<pre lang="cpp"><code>
-  float* values = mq2.read(true); //true to print the values in the Serial
-</code></pre>
-
-Read specific data:
-<pre lang="cpp"><code>
-  float lpg = mq2.readLPG();
-  
-  float co = mq2.readCO();
-  
-  float smoke = mq2.readSmoke();
-</code></pre>
+yanoschik's fork history
+========================
+v0.1
+- code reformatting and redesign (4 better readability)
+- correct Arduino library layout
+- variable and code optimization
+- corrected errors
+- reading rate reworked - implemented sample rate for sensor reading and also for each gas value

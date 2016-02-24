@@ -1,0 +1,26 @@
+#######################################
+# Syntax Coloring Map For MQ2
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+read  KEYWORD2
+readLPG  KEYWORD2
+readCO  KEYWORD2
+readSmoke  KEYWORD2
+begin  KEYWORD2
+#######################################
+# Instances (KEYWORD2)
+#######################################
+MQ2	 KEYWORD2
+#######################################
+# Constants (LITERAL1)
+#######################################
+MQ2_LPG  LITERAL1
+MQ2_CO  LITERAL1
+MQ2_SMOKE  LITERAL1
