@@ -16,10 +16,10 @@ To install the library into the Arduino IDE, download it as zip and unzip it int
 For more on usage - see the included [example](/examples/mq2_example/mq2_example.ino).
 
 yanoschik's fork history
-========================
+------------------------
 v0.1
 - code reformatting and redesign (4 better readability)
 - correct Arduino library layout
 - variable and code optimization
 - corrected errors
-- reading rate reworked - implemented sample rate for sensor reading and also for each gas value
+- reading rate reworked (implemented sample rate for sensor reading and also for each gas value)

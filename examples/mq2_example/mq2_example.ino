@@ -1,9 +1,9 @@
 #include <MQ2.h>
 
-int pin = A9; //change this with the pin that you use
+int pin = A9; //change this to the pin that you use
 float lpg = 0, co = 0, smoke = 0;
 
-MQ2 mq2(pin, true); //instance (with serial output enabled)
+MQ2 mq2(pin, true); //instance (true=with serial output enabled)
 
 void setup()
 {
@@ -19,7 +19,7 @@ void loop()
   * 3 = SMOKE in ppm
   */
   float* values= mq2.read(true); //set it false if you don't want to print the values in the Serial
-  
+
   //Reading specific values:
   //lpg = values[0];
   lpg = mq2.readLPG();
@@ -27,8 +27,8 @@ void loop()
   co = mq2.readCO();
   //smoke = values[2];
   smoke = mq2.readSmoke();
-  
+
   //do something...
-  
-  delay(2000);
+
+  delay(2000); //but values are read according to the rate defined in the library
 }
