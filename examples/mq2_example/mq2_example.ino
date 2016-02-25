@@ -1,4 +1,4 @@
-#include <MQ2.h>
+#include <MQ2Lib.h>
 
 int pin = A9; //change this to the pin that you use
 float lpg = 0, co = 0, smoke = 0;

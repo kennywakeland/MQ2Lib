@@ -1,9 +1,9 @@
 /* MQ2 gas sensor library
-   Home: https://github.com/yanoschik/MQ-2-sensor-library
+   Home: https://github.com/yanoschik/MQ2Lib
    (Based on: https://github.com/xerlay11/MQ-2-sensor-library)
 */ 
-#ifndef MQ2_h__
-#define MQ2_h__
+#ifndef MQ2Lib_h__
+#define MQ2Lib_h__
 
 #if ARDUINO >= 100
  #include "Arduino.h"
@@ -56,4 +56,4 @@ private:
 	unsigned long lastReadTime[4] = {0,0,0,0};  //for reading sensor and calculating each value {sensor,MQ2_LPG,MQ2_CO,MQ2_SMOKE}
 };
 
-#endif //MQ2_h__
+#endif //MQ2Lib_h__

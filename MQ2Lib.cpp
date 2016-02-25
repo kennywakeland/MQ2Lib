@@ -1,8 +1,8 @@
 /* MQ2 gas sensor library
-   Home: https://github.com/yanoschik/MQ-2-sensor-library
+   Home: https://github.com/yanoschik/MQ2Lib
    (Based on: https://github.com/xerlay11/MQ-2-sensor-library)
 */ 
-#include "MQ2.h"
+#include "MQ2Lib.h"
 
 /* ----- constructor
    \param in   pin - sensor pin no.

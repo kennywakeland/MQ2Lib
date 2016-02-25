@@ -1,6 +1,5 @@
-MQ-2 sensor library - yanoschik's fork
-======================================
-
+MQ-2 sensor library
+===================
 This is a simple library to use with the MQ-2 sensor and Arduino.
 
 Based on: <a href="https://github.com/xerlay11/MQ-2-sensor-library" target="_blank">xerlay11/MQ-2-sensor-library</a>
