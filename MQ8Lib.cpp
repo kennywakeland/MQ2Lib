@@ -1,26 +1,26 @@
-/* MQ2 gas sensor library
+/* MQ8 gas sensor library
    Home: https://github.com/kennywakeland/MQLib
    (Based on: https://github.com/xerlay11/MQ-2-sensor-library)
 */ 
-#include "MQ2Lib.h"
+#include "MQ8Lib.h"
 
 /* ----- constructor
    \param in   pin - sensor pin no.
    \param in   doSerial - true=do serial output [default=false]
 */ 
-MQ2::MQ2(short pin, bool doSerial)
+MQ8::MQ8(short pin, bool doSerial)
 {
   _pin = pin;
   _serial = doSerial;
 }
 
 /* ----- Init */ 
-void MQ2::begin()
+void MQ8::begin()
 {
   Ro = MQCalibration();
   if (_serial)
   {
-    Serial.print(F("MQ2 Ro: "));
+    Serial.print(F("MQ8 Ro: "));
     Serial.print(Ro);
     Serial.println(F(" kohm"));
   }
@@ -29,12 +29,12 @@ void MQ2::begin()
 /* ----- Read all
    \param in   print - true=print to serial (if enabled) [default=false]
 */ 
-float* MQ2::read(bool print)
+float* MQ8::read(bool print)
 {
   MQRead();
-  MQGetGasPercentage(read_val/Ro, MQ2_LPG);
-  MQGetGasPercentage(read_val/Ro, MQ2_CO);
-  MQGetGasPercentage(read_val/Ro, MQ2_SMOKE);
+  MQGetGasPercentage(read_val/Ro, MQ8_LPG);
+  MQGetGasPercentage(read_val/Ro, MQ8_CO);
+  MQGetGasPercentage(read_val/Ro, MQ8_SMOKE);
 
   if (print && _serial) //printing to serial (a bit complicated construction, but saving space for string constants)
   {
@@ -43,7 +43,7 @@ float* MQ2::read(bool print)
       if(i==0)
       {
         Serial.print(F("LPG: "));
-        Serial.print(values[MQ2_LPG]);
+        Serial.print(values[MQ8_LPG]);
       }
       else
         Serial.print(F("  "));
@@ -51,12 +51,12 @@ float* MQ2::read(bool print)
       if(i==1)
       {
         Serial.print(F("CO: "));
-        Serial.print(values[MQ2_CO]);
+        Serial.print(values[MQ8_CO]);
       }
       if(i==2)
       {
         Serial.print(F("SMOKE: "));
-        Serial.print(values[MQ2_SMOKE]);
+        Serial.print(values[MQ8_SMOKE]);
       }
       Serial.print(F("ppm"));
     }
@@ -67,61 +67,61 @@ float* MQ2::read(bool print)
 }
 
 /* ----- Read LPG */ 
-float MQ2::readLPG()
+float MQ8::readLPG()
 {
-  return MQGetGasPercentage(MQRead()/Ro, MQ2_LPG);
+  return MQGetGasPercentage(MQRead()/Ro, MQ8_LPG);
 }
 
 /* ----- Read CO */ 
-float MQ2::readCO()
+float MQ8::readCO()
 {
-  return MQGetGasPercentage(MQRead()/Ro, MQ2_CO);
+  return MQGetGasPercentage(MQRead()/Ro, MQ8_CO);
 }
 
 /* ----- Read smoke */ 
-float MQ2::readSmoke()
+float MQ8::readSmoke()
 {
-  return MQGetGasPercentage(MQRead()/Ro, MQ2_SMOKE);
+  return MQGetGasPercentage(MQRead()/Ro, MQ8_SMOKE);
 }
 
 /* ----- Resistance calculation
    \param in   raw_adc - sensor value
 */ 
-float MQ2::MQResistanceCalculation(int raw_adc)
+float MQ8::MQResistanceCalculation(int raw_adc)
 {
-  return (((float)MQ2_RL_VALUE*(1023-raw_adc)/raw_adc));
+  return (((float)MQ8_RL_VALUE*(1023-raw_adc)/raw_adc));
 }
 
 /* ----- Calibration */ 
-float MQ2::MQCalibration()
+float MQ8::MQCalibration()
 {
   read_val = 0;
-  for (int i=0; i<MQ2_CALIBARAION_SAMPLE_TIMES; i++) //take multiple samples
+  for (int i=0; i<MQ8_CALIBARAION_SAMPLE_TIMES; i++) //take multiple samples
   {
     read_val += MQResistanceCalculation(analogRead(_pin));
-    delay(MQ2_CALIBRATION_SAMPLE_INTERVAL);
+    delay(MQ8_CALIBRATION_SAMPLE_INTERVAL);
   }
 
-  read_val = read_val/MQ2_CALIBARAION_SAMPLE_TIMES;    //calculate the average value
-  read_val = read_val/MQ2_RO_CLEAN_AIR_FACTOR;         //divided by RO_CLEAN_AIR_FACTOR yields the Ro
+  read_val = read_val/MQ8_CALIBARAION_SAMPLE_TIMES;    //calculate the average value
+  read_val = read_val/MQ8_RO_CLEAN_AIR_FACTOR;         //divided by RO_CLEAN_AIR_FACTOR yields the Ro
                                                        //according to the chart in the datasheet
   return read_val;
 }
 
 /* ----- Reading */ 
-float MQ2::MQRead()
+float MQ8::MQRead()
 {
-  if (millis() < (lastReadTime[0] + MQ2_READ_RATE))
+  if (millis() < (lastReadTime[0] + MQ8_READ_RATE))
     return read_val;
 
   read_val = 0;
-  for (int i=0; i<MQ2_READ_SAMPLE_TIMES; i++)
+  for (int i=0; i<MQ8_READ_SAMPLE_TIMES; i++)
   {
     read_val += MQResistanceCalculation(analogRead(_pin));
-    delay(MQ2_READ_SAMPLE_INTERVAL);
+    delay(MQ8_READ_SAMPLE_INTERVAL);
   }
 
-  read_val = read_val/MQ2_READ_SAMPLE_TIMES;    //calculate the average value
+  read_val = read_val/MQ8_READ_SAMPLE_TIMES;    //calculate the average value
   lastReadTime[0] = millis();
   return read_val;
 }
@@ -130,20 +130,20 @@ float MQ2::MQRead()
    \param in   rs_ro_rato - read resistance ratio
    \param in   gas_id - id of gas, see defines
 */ 
-float MQ2::MQGetGasPercentage(float rs_ro_ratio, short gas_id)
+float MQ8::MQGetGasPercentage(float rs_ro_ratio, short gas_id)
 {
-  if (gas_id != MQ2_LPG && gas_id != MQ2_CO && gas_id != MQ2_SMOKE)
+  if (gas_id != MQ8_LPG && gas_id != MQ8_CO && gas_id != MQ8_SMOKE)
     return 0;
 
-  if (millis() < (lastReadTime[1+gas_id] + MQ2_READ_RATE))
+  if (millis() < (lastReadTime[1+gas_id] + MQ8_READ_RATE))
     return values[gas_id];
 
-  if (gas_id == MQ2_LPG)
-    values[MQ2_LPG] = MQGetPercentage(rs_ro_ratio, LPGCurve);
-  else if (gas_id == MQ2_CO)
-    values[MQ2_CO] = MQGetPercentage(rs_ro_ratio, COCurve);
-  else if (gas_id == MQ2_SMOKE)
-    values[MQ2_SMOKE] = MQGetPercentage(rs_ro_ratio, SmokeCurve);
+  if (gas_id == MQ8_LPG)
+    values[MQ8_LPG] = MQGetPercentage(rs_ro_ratio, LPGCurve);
+  else if (gas_id == MQ8_CO)
+    values[MQ8_CO] = MQGetPercentage(rs_ro_ratio, COCurve);
+  else if (gas_id == MQ8_SMOKE)
+    values[MQ8_SMOKE] = MQGetPercentage(rs_ro_ratio, SmokeCurve);
   else
     return 0; //redundant
 
@@ -155,7 +155,7 @@ float MQ2::MQGetGasPercentage(float rs_ro_ratio, short gas_id)
    \param in   rs_ro_rato - read resistance ratio
    \param in   pcurve - gas curve, see header
 */ 
-float MQ2::MQGetPercentage(float rs_ro_ratio, const float *pcurve)
+float MQ8::MQGetPercentage(float rs_ro_ratio, const float *pcurve)
 {
   return (pow(10,(((log(rs_ro_ratio)-pcurve[1])/pcurve[2]) + pcurve[0])));
 }

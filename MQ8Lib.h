@@ -1,9 +1,9 @@
-/* MQ2 gas sensor library
+/* MQ8 gas sensor library
    Home: https://github.com/kennywakeland/MQLib
    (Based on: https://github.com/xerlay11/MQ-2-sensor-library)
-*/
-#ifndef MQ2Lib_h__
-#define MQ2Lib_h__
+*/ 
+#ifndef MQ8Lib_h__
+#define MQ8Lib_h__
 
 #if ARDUINO >= 100
  #include "Arduino.h"
@@ -12,23 +12,23 @@
 #endif
 
 //gases id (also for value indexing)
-#define MQ2_LPG    0
-#define MQ2_CO     1
-#define MQ2_SMOKE  2
+#define MQ8_LPG    0
+#define MQ8_CO     1
+#define MQ8_SMOKE  2
 
 //other defines
-#define  MQ2_RL_VALUE  5     //define the load resistance on the board, in kilo Ohms
-#define  MQ2_RO_CLEAN_AIR_FACTOR  9.83
-#define  MQ2_CALIBARAION_SAMPLE_TIMES  5
-#define  MQ2_CALIBRATION_SAMPLE_INTERVAL  50
-#define  MQ2_READ_SAMPLE_TIMES  5
-#define  MQ2_READ_SAMPLE_INTERVAL  50
-#define  MQ2_READ_RATE  5000  //define value reading rate [ms] (applies for sensor reading and also for each gas value calculation)
+#define  MQ8_RL_VALUE  5     //define the load resistance on the board, in kilo Ohms
+#define  MQ8_RO_CLEAN_AIR_FACTOR  9.83
+#define  MQ8_CALIBARAION_SAMPLE_TIMES  5
+#define  MQ8_CALIBRATION_SAMPLE_INTERVAL  50
+#define  MQ8_READ_SAMPLE_TIMES  5
+#define  MQ8_READ_SAMPLE_INTERVAL  50
+#define  MQ8_READ_RATE  5000  //define value reading rate [ms] (applies for sensor reading and also for each gas value calculation)
 
-class MQ2
+class MQ8
 {
 public:
-	MQ2(short pin, bool doSerial = false);
+	MQ8(short pin, bool doSerial = false);
 	float* read(bool print = false);
 	float readLPG();
 	float readCO();
@@ -45,7 +45,7 @@ private:
 	float Ro = 10;  //calculated by calibration
 
   float read_val = 0; //value from sensor (precalculated)
-	float values[3] = {0,0,0}; //calculated gas values {MQ2_LPG,MQ2_CO,MQ2_SMOKE}
+	float values[3] = {0,0,0}; //calculated gas values {MQ8_LPG,MQ8_CO,MQ8_SMOKE}
 
 	float MQRead();
 	float MQGetGasPercentage(float rs_ro_ratio, short gas_id);
@@ -53,7 +53,7 @@ private:
 	float MQCalibration();
 	float MQResistanceCalculation(int raw_adc);
 
-	unsigned long lastReadTime[4] = {0,0,0,0};  //for reading sensor and calculating each value {sensor,MQ2_LPG,MQ2_CO,MQ2_SMOKE}
+	unsigned long lastReadTime[4] = {0,0,0,0};  //for reading sensor and calculating each value {sensor,MQ8_LPG,MQ8_CO,MQ8_SMOKE}
 };
 
-#endif //MQ2Lib_h__
+#endif //MQ8Lib_h__
