@@ -1,4 +1,4 @@
-MQ-2 sensor library
+MQ sensor library
 ===================
 This is a simple library to use with the MQ-2 sensor and Arduino.
 
@@ -7,6 +7,10 @@ Based on: <a href="https://github.com/xerlay11/MQ-2-sensor-library" target="_bla
 More info also here:
 - <a href="http://sandboxelectronics.com/?p=165" target="_blank">Sandbox electronics</a>
 - <a href="http://playground.arduino.cc/Main/MQGasSensors" target="_blank">Arduino Playground - MQGasSensors</a>
+
+MQ-2 Based on: <a href="http://sandboxelectronics.com/?p=165" target="_blank">sandboxelectronics</a>
+MQ-6 Based on: <a href="http://sandboxelectronics.com/?p=191" target="_blank">sandboxelectronics</a>
+MQ-8 Based on: <a href="http://sandboxelectronics.com/?p=196" target="_blank">sandboxelectronics</a>
 
 Usage
 ======
