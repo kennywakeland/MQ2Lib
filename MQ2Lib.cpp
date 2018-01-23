@@ -8,7 +8,7 @@
    \param in   pin - sensor pin no.
    \param in   doSerial - true=do serial output [default=false]
 */ 
-MQ2::MQ2(short pin, bool doSerial)
+MQ2::MQ2(unsigned short pin, bool doSerial)
 {
   _pin = pin;
   _serial = doSerial;

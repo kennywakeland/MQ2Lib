@@ -1,6 +1,7 @@
 /* MQ2 gas sensor library
    Home: https://github.com/kennywakeland/MQLib
    (Based on: https://github.com/xerlay11/MQ-2-sensor-library)
+   http://sandboxelectronics.com/?p=165
 */
 #ifndef MQ2Lib_h__
 #define MQ2Lib_h__
@@ -28,7 +29,7 @@
 class MQ2
 {
 public:
-	MQ2(short pin, bool doSerial = false);
+	MQ2(unsigned short pin, bool doSerial = false);
 	float* read(bool print = false);
 	float readLPG();
 	float readCO();
