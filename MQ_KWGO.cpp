@@ -13,8 +13,8 @@
 
 /// change this to the pin that you use
 #define mq4_pin  A0
-#define mq6_pin  A0
-#define mq8_pin  A0
+#define mq6_pin  A3
+#define mq8_pin  A4
 
 #define mq2_pin  A1
 #define mq9_pin  A2
