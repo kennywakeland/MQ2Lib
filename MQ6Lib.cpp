@@ -11,19 +11,25 @@
 MQ6::MQ6(unsigned short pin, bool doSerial)
 {
     _pin = pin;
+
+#ifdef MQ_DEBUG
     _serial = doSerial;
+#endif
 }
 
 /* ----- Init */
 void MQ6::begin()
 {
     Ro = MQCalibration();
+
+#ifdef MQ_DEBUG
     if(_serial)
     {
         Serial.print(F("MQ6 Ro: "));
         Serial.print(Ro);
         Serial.println(F(" kohm"));
     }
+#endif
 }
 
 /* ----- Read all
@@ -35,6 +41,7 @@ float* MQ6::read(bool print)
     MQGetGasPercentage(read_val / Ro, MQ6_LPG);
     MQGetGasPercentage(read_val / Ro, MQ6_CH4);
 
+#ifdef MQ_DEBUG
     if(print && _serial) //printing to serial (a bit complicated construction, but saving space for string constants)
     {
         for(int i = 0; i < 2; i++)
@@ -57,8 +64,14 @@ float* MQ6::read(bool print)
         }
         Serial.print(F("\n"));
     }
+#endif
 
     return values;
+}
+
+float MQ6::readRaw()
+{
+    return MQRead();
 }
 
 /* ----- Read LPG */

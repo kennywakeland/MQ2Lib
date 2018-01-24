@@ -16,6 +16,9 @@
 #include "WProgram.h"
 #endif
 
+#include "MQBase.h"
+
+
 //gases id (also for value indexing)
 #define MQ9_LPG    0
 #define MQ9_CH4    1
@@ -30,18 +33,25 @@
 #define  MQ9_READ_SAMPLE_INTERVAL  50 /// define how many samples you are going to take in normal operation
 #define  MQ9_READ_RATE  5000  /// define value reading rate [ms] (applies for sensor reading and also for each gas value calculation)
 
-class MQ9
+class MQ9: public MQBase
 {
 public:
     MQ9(unsigned short pin, bool doSerial = false);
-    float* read(bool print = false);
+    float* read(bool print);
+    float readRaw();
+
     float readLPG();
     float readCH4();
+
     void begin();
 
 private:
     unsigned short _pin;
+
+#ifdef MQ_DEBUG
     bool _serial;
+#endif
+
 
     /*****************************Globals***********************************************/
     /// two points are taken from the curve.

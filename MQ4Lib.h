@@ -17,6 +17,8 @@
 
 #endif
 
+#include "MQBase.h"
+
 //gases id (also for value indexing)
 #define MQ4_H2    0
 
@@ -29,18 +31,23 @@
 #define  MQ4_READ_SAMPLE_INTERVAL  50 /// define how many samples you are going to take in normal operation
 #define  MQ4_READ_RATE  5000  //define value reading rate [ms] (applies for sensor reading and also for each gas value calculation)
 
-class MQ4
+class MQ4: public MQBase
 {
 public:
     MQ4(unsigned short pin, bool doSerial = false);
-    float* read(bool print = false);
+    float* read(bool print);
+    float readRaw();
+
     float readH2();
 
     void begin();
 
 private:
     unsigned short _pin;
+
+#ifdef MQ_DEBUG
     bool _serial;
+#endif
 
     /// two points are taken from the curve in datasheet.
     /// with these two points, a line is formed which is "approximately equivalent" to the original curve.

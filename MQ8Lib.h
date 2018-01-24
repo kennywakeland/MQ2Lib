@@ -14,8 +14,11 @@
 #include "WProgram.h"
 #endif
 
+#include "MQBase.h"
+
 //gases id (also for value indexing)
 #define MQ8_H2    0
+
 
 //other defines
 #define  MQ8_RL_VALUE  10     /// define the load resistance on the board, in kilo Ohms
@@ -26,18 +29,24 @@
 #define  MQ8_READ_SAMPLE_INTERVAL  50 /// define how many samples you are going to take in normal operation
 #define  MQ8_READ_RATE  5000  //define value reading rate [ms] (applies for sensor reading and also for each gas value calculation)
 
-class MQ8
+class MQ8: public MQBase
 {
 public:
     MQ8(unsigned short pin, bool doSerial = false);
-    float* read(bool print = false);
+    float* read(bool print);
+    float readRaw();
+
     float readH2();
 
     void begin();
 
 private:
     unsigned short _pin;
+
+#ifdef MQ_DEBUG
     bool _serial;
+#endif
+
 
     /// two points are taken from the curve in datasheet.
     /// with these two points, a line is formed which is "approximately equivalent" to the original curve.

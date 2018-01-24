@@ -11,19 +11,26 @@
 MQ4::MQ4(unsigned short pin, bool doSerial)
 {
     _pin = pin;
+
+#ifdef MQ_DEBUG
     _serial = doSerial;
+#endif
 }
 
 /* ----- Init */
 void MQ4::begin()
 {
     Ro = MQCalibration();
+
+#ifdef MQ_DEBUG
     if(_serial)
     {
         Serial.print(F("MQ4 Ro: "));
         Serial.print(Ro);
         Serial.println(F(" kohm"));
     }
+#endif
+
 }
 
 /* ----- Read all
@@ -34,6 +41,7 @@ float* MQ4::read(bool print)
     MQRead();
     MQGetGasPercentage(read_val / Ro, MQ4_H2);
 
+#ifdef MQ_DEBUG
     if(print && _serial) //printing to serial (a bit complicated construction, but saving space for string constants)
     {
         for(int i = 0; i < 3; i++)
@@ -51,8 +59,14 @@ float* MQ4::read(bool print)
         }
         Serial.print(F("\n"));
     }
+#endif
 
     return values;
+}
+
+float MQ4::readRaw()
+{
+    return MQRead();
 }
 
 /* ----- Read H2 */

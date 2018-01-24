@@ -11,19 +11,25 @@
 MQ8::MQ8(unsigned short pin, bool doSerial)
 {
     _pin = pin;
+
+#ifdef MQ_DEBUG
     _serial = doSerial;
+#endif
 }
 
 /* ----- Init */
 void MQ8::begin()
 {
     Ro = MQCalibration();
+
+#ifdef MQ_DEBUG
     if(_serial)
     {
         Serial.print(F("MQ8 Ro: "));
         Serial.print(Ro);
         Serial.println(F(" kohm"));
     }
+#endif
 }
 
 /* ----- Read all
@@ -34,6 +40,7 @@ float* MQ8::read(bool print)
     MQRead();
     MQGetGasPercentage(read_val / Ro, MQ8_H2);
 
+#ifdef MQ_DEBUG
     if(print && _serial) //printing to serial (a bit complicated construction, but saving space for string constants)
     {
         for(int i = 0; i < 3; i++)
@@ -51,8 +58,14 @@ float* MQ8::read(bool print)
         }
         Serial.print(F("\n"));
     }
+#endif
 
     return values;
+}
+
+float MQ8::readRaw()
+{
+    return MQRead();
 }
 
 /* ----- Read H2 */

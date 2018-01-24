@@ -19,15 +19,24 @@
 #define mq2_pin  A1
 #define mq9_pin  A2
 
-float lpg = 0, co = 0, smoke = 0;
 
 ///instance (true=with serial output enabled)
-MQ2 mq2(mq2_pin, true);
-MQ6 mq6(mq6_pin, true);
-MQ8 mq8(mq8_pin, true);
+MQ2 mq2(mq2_pin, false);
+MQ6 mq6(mq6_pin, false);
+MQ8 mq8(mq8_pin, false);
 
-MQ4 mq4(mq4_pin, true);
-MQ9 mq9(mq9_pin, true);
+MQ4 mq4(mq4_pin, false);
+MQ9 mq9(mq9_pin, false);
+
+char KW_ROW[] = " ROW: ";
+
+char KW_LPG[] = " LPG: ";
+char KW_SMOKE[] = " SMOKE: ";
+char KW_CO[] = " CO:";
+char KW_CH4[] = " CH4: ";
+char KW_H2[] = " H2: ";
+
+float* values = NULL;
 
 void setup()
 {
@@ -43,31 +52,78 @@ void setup()
 
 void loop()
 {
-    Serial.print(F("-----------\n"));
-
-    /* Read all values from the sensor - it returns an array which contains 3 values
-    * 1 = LPG in ppm
-    * 2 = CO in ppm
-    * 3 = SMOKE in ppm
-    */
-    float* values = mq2.read(true); //set it false if you don't want to print the values in the Serial
+    Serial.print(F("----------\n"));
 
 
-    //Reading specific values:
-    //lpg = values[0];
-    lpg = mq2.readLPG();
-    //co = values[1];
-    co = mq2.readCO();
-    //smoke = values[2];
-    smoke = mq2.readSmoke();
+    {
+        values = mq2.read(false);
+        Serial.print(F("MQ2#"));
 
-    values = mq6.read(true);
-    values = mq8.read(true);
+        Serial.print(KW_ROW);
+        Serial.print(mq2.readRaw());
 
-    values = mq4.read(true);
-    values = mq9.read(true);
+        Serial.print(KW_LPG);
+        Serial.print(values[MQ2_LPG]);
 
-    Serial.print(F("\n"));
+        Serial.print(KW_CO);
+        Serial.print(values[MQ2_CO]);
+
+        Serial.print(KW_SMOKE);
+        Serial.print(values[MQ2_SMOKE]);
+        Serial.print(F("\n"));
+    }
+
+    {
+        values = mq4.read(false);
+        Serial.print(F("MQ4#"));
+
+        Serial.print(KW_ROW);
+        Serial.print(mq4.readRaw());
+
+        Serial.print(F("\n"));
+    }
+
+    {
+        values = mq6.read(false);
+        Serial.print(F("MQ6#"));
+
+        Serial.print(KW_ROW);
+        Serial.print(mq6.readRaw());
+
+        Serial.print(KW_LPG);
+        Serial.print(values[MQ6_LPG]);
+
+        Serial.print(KW_CH4);
+        Serial.print(values[MQ6_CH4]);
+
+        Serial.print(F("\n"));
+    }
+
+
+    {
+        values = mq8.read(false);
+        Serial.print(F("MQ8#"));
+
+        Serial.print(KW_ROW);
+        Serial.print(mq8.readRaw());
+
+        Serial.print(KW_H2);
+        Serial.print(values[MQ8_H2]);
+
+        Serial.print(F("\n"));
+    }
+
+    {
+        values = mq9.read(false);
+        Serial.print(F("MQ9#"));
+
+        Serial.print(KW_ROW);
+        Serial.print(mq9.readRaw());
+
+        Serial.print(F("\n"));
+    }
+
+    Serial.print(F("**********\n"));
 
     //do something...
 
