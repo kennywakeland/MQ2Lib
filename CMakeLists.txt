@@ -16,6 +16,6 @@ set(${CMAKE_PROJECT_NAME}_PORT /dev/ttyACM0)
 # set(mega.upload.speed 115200)
 
 generate_arduino_firmware(${CMAKE_PROJECT_NAME}
-        SRCS MQ_KWGO.cpp MQ2Lib.cpp MQ6Lib.cpp MQ8Lib.cpp
-        HDRS MQ2Lib.h MQ6Lib.h MQ8Lib.h
+        SRCS MQ_KWGO.cpp MQ2Lib.cpp MQ4Lib.cpp MQ6Lib.cpp MQ8Lib.cpp MQ9Lib.cpp
+        HDRS MQ2Lib.h MQ4Lib.h MQ6Lib.h MQ8Lib.h MQ9Lib.h
         )

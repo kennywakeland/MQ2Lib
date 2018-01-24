@@ -8,9 +8,14 @@ More info also here:
 - <a href="http://sandboxelectronics.com/?p=165" target="_blank">Sandbox electronics</a>
 - <a href="http://playground.arduino.cc/Main/MQGasSensors" target="_blank">Arduino Playground - MQGasSensors</a>
 
-MQ-2 Based on: <a href="http://sandboxelectronics.com/?p=165" target="_blank">sandboxelectronics</a>
-MQ-6 Based on: <a href="http://sandboxelectronics.com/?p=191" target="_blank">sandboxelectronics</a>
-MQ-8 Based on: <a href="http://sandboxelectronics.com/?p=196" target="_blank">sandboxelectronics</a>
+MQ sensor
+----
+- MQ-2 Based on: <a href="http://sandboxelectronics.com/?p=165" target="_blank">sandboxelectronics</a>
+- MQ-6 Based on: <a href="http://sandboxelectronics.com/?p=191" target="_blank">sandboxelectronics</a>
+- MQ-8 Based on: <a href="http://sandboxelectronics.com/?p=196" target="_blank">sandboxelectronics</a>
+
+- MQ-4 The Curve is wrong
+- MQ-9 The Curve is wrong
 
 Usage
 ======

@@ -20,8 +20,8 @@
 //other defines
 #define  MQ8_RL_VALUE  10     /// define the load resistance on the board, in kilo Ohms
 #define  MQ8_RO_CLEAN_AIR_FACTOR  9.21  /// RO_CLEAR_AIR_FACTOR=(Sensor resistance in clean air)/RO, which is derived from the chart in datasheet
-#define  MQ8_CALIBARAION_SAMPLE_TIMES  50 /// define how many samples you are going to take in the calibration phase
-#define  MQ8_CALIBRATION_SAMPLE_INTERVAL  500 /// define the time interal(in milisecond) between each samples in the cablibration phase
+#define  MQ8_CALIBARAION_SAMPLE_TIMES  10 /// define how many samples you are going to take in the calibration phase
+#define  MQ8_CALIBRATION_SAMPLE_INTERVAL  100 /// define the time interal(in milisecond) between each samples in the cablibration phase
 #define  MQ8_READ_SAMPLE_TIMES  5 /// define the time interal(in milisecond) between each samples in normal operation
 #define  MQ8_READ_SAMPLE_INTERVAL  50 /// define how many samples you are going to take in normal operation
 #define  MQ8_READ_RATE  5000  //define value reading rate [ms] (applies for sensor reading and also for each gas value calculation)
