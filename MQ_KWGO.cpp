@@ -32,7 +32,7 @@ char KW_ROW[] = " ROW: ";
 
 char KW_LPG[] = " LPG: ";
 char KW_SMOKE[] = " SMOKE: ";
-char KW_CO[] = " CO:";
+char KW_CO[] = " CO: ";
 char KW_CH4[] = " CH4: ";
 char KW_H2[] = " H2: ";
 
@@ -127,5 +127,5 @@ void loop()
 
     //do something...
 
-    delay(2000); //but values are read according to the rate defined in the library
+    delay(1000); //but values are read according to the rate defined in the library
 }
